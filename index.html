@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auntie Dani's Pet Sitting | Las Vegas Pet Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FDF6EC;
+    --warm-white: #FFFAF4;
+    --terra: #C4634F;
+    --terra-light: #E8856E;
+    --terra-dark: #9B4A38;
+    --sage: #3D5A47;
+    --sage-light: #5C7A68;
+    --sage-pale: #EAF0EB;
+    --brown: #5C3D2E;
+    --tan: #D4A574;
+    --tan-light: #F0D9BE;
+    --text: #2C1F14;
+    --text-muted: #7A6558;
+    --border: rgba(92,61,46,0.12);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:100;
+    background: rgba(253,246,236,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.25rem;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--brown);
+    font-weight: 600;
+    text-decoration: none;
+    line-height: 1.2;
+  }
+  .nav-logo span { display:block; font-size:0.65rem; font-family:'DM Sans',sans-serif; font-weight:300; color:var(--text-muted); letter-spacing:0.08em; text-transform:uppercase; }
+
+  .nav-right { display:flex; align-items:center; gap:0.75rem; }
+
+  .nav-links { display:none; gap:1.5rem; }
+  @media(min-width:768px){ .nav-links { display:flex; } }
+  .nav-links a { font-size:0.85rem; color:var(--text-muted); text-decoration:none; font-weight:400; transition:color 0.2s; }
+  .nav-links a:hover { color:var(--terra); }
+
+  .btn-book-nav {
+    background: var(--terra);
+    color: white;
+    border: none;
+    padding: 0.5rem 1.1rem;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-book-nav:hover { background: var(--terra-dark); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100svh;
+    padding: 80px 1.25rem 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    background: var(--cream);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content:'';
+    position:absolute; inset:0;
+    background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(196,99,79,0.08) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 40% at 20% 20%, rgba(61,90,71,0.06) 0%, transparent 60%);
+    pointer-events:none;
+  }
+
+  .hero-paws {
+    position:absolute;
+    font-size:6rem;
+    opacity:0.04;
+    pointer-events:none;
+    user-select:none;
+  }
+  .hero-paws.p1 { top:10%; left:-2%; transform:rotate(-20deg); font-size:8rem; }
+  .hero-paws.p2 { top:60%; right:-1%; transform:rotate(15deg); font-size:10rem; }
+  .hero-paws.p3 { bottom:5%; left:10%; transform:rotate(-5deg); font-size:5rem; }
+
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:0.4rem;
+    background: var(--sage-pale);
+    color: var(--sage);
+    font-size:0.75rem;
+    font-weight:500;
+    letter-spacing:0.05em;
+    padding:0.35rem 0.9rem;
+    border-radius:50px;
+    margin-bottom:1.5rem;
+    border: 1px solid rgba(61,90,71,0.2);
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 8vw, 4.5rem);
+    line-height: 1.1;
+    color: var(--brown);
+    margin-bottom: 0.4rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--terra);
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    color: var(--text-muted);
+    font-weight: 300;
+    margin-bottom: 2rem;
+    max-width: 420px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-ctas {
+    display:flex; flex-wrap:wrap; gap:0.75rem; justify-content:center;
+    animation: fadeUp 0.6s 0.3s ease both;
+    margin-bottom: 3rem;
+  }
+
+  .btn-primary {
+    background: var(--terra);
+    color: white;
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    display:inline-flex; align-items:center; gap:0.4rem;
+  }
+  .btn-primary:hover { background: var(--terra-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(196,99,79,0.3); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--brown);
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1.5px solid var(--tan);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { background: var(--tan-light); transform: translateY(-2px); }
+
+  .hero-trust {
+    display:flex; flex-wrap:wrap; gap:1.5rem; justify-content:center;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+  .trust-item {
+    display:flex; align-items:center; gap:0.4rem;
+    font-size:0.8rem; color:var(--text-muted);
+  }
+  .trust-dot { width:6px; height:6px; border-radius:50%; background:var(--sage); }
+
+  /* SECTIONS */
+  section { padding: 4rem 1.25rem; }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--terra);
+    margin-bottom: 0.6rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    color: var(--brown);
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-sub {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 300;
+    max-width: 480px;
+    line-height: 1.7;
+  }
+
+  .section-header { margin-bottom: 2.5rem; }
+
+  /* SERVICES */
+  .services { background: var(--warm-white); }
+
+  .services-grid {
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  @media(min-width:600px){ .services-grid { grid-template-columns: 1fr 1fr; } }
+
+  .service-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1.75rem;
+    position:relative;
+    overflow:hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .service-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(92,61,46,0.1); }
+  .service-card::before {
+    content:'';
+    position:absolute; top:0; left:0; right:0; height:3px;
+    background: var(--terra);
+    border-radius:20px 20px 0 0;
+  }
+  .service-card.walk::before { background: var(--sage); }
+
+  .service-icon { font-size:2rem; margin-bottom:0.75rem; }
+  .service-name {
+    font-family:'Playfair Display',serif;
+    font-size:1.3rem;
+    color:var(--brown);
+    margin-bottom:0.4rem;
+  }
+  .service-desc { font-size:0.85rem; color:var(--text-muted); line-height:1.6; margin-bottom:1rem; font-weight:300; }
+  .service-price {
+    font-size:1.1rem;
+    font-weight:500;
+    color:var(--terra);
+    margin-bottom:1rem;
+  }
+  .service-price span { font-size:0.75rem; font-weight:300; color:var(--text-muted); }
+  .service-includes { list-style:none; }
+  .service-includes li {
+    font-size:0.78rem;
+    color:var(--text-muted);
+    padding:0.2rem 0;
+    display:flex; align-items:center; gap:0.4rem;
+  }
+  .service-includes li::before { content:'✓'; color:var(--sage); font-weight:700; font-size:0.7rem; }
+
+  .book-link {
+    display:inline-flex; align-items:center; gap:0.3rem;
+    margin-top:1.25rem;
+    background: var(--terra);
+    color:white;
+    padding:0.6rem 1.2rem;
+    border-radius:50px;
+    font-size:0.82rem;
+    font-weight:500;
+    text-decoration:none;
+    transition:all 0.2s;
+  }
+  .book-link:hover { background:var(--terra-dark); transform:translateY(-1px); }
+  .service-card.walk .book-link { background:var(--sage); }
+  .service-card.walk .book-link:hover { background:var(--sage-light); }
+
+  /* ABOUT */
+  .about { background: var(--sage); color:white; border-radius:2rem; margin:0 0.75rem; }
+  .about .section-label { color: rgba(255,255,255,0.6); }
+  .about .section-title { color:white; }
+  .about-inner { max-width: 700px; }
+  .about-text { color:rgba(255,255,255,0.8); font-weight:300; line-height:1.8; font-size:0.95rem; margin-bottom:1.25rem; }
+  .about-certs { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:1.5rem; }
+  .cert-badge {
+    background:rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.2);
+    color:white;
+    padding:0.35rem 0.85rem;
+    border-radius:50px;
+    font-size:0.75rem;
+    font-weight:400;
+  }
+  .about-emoji { font-size:3rem; margin-bottom:1rem; }
+
+  /* BOOKING */
+  .booking { background: var(--cream); }
+  .booking-inner { max-width:600px; margin:0 auto; text-align:center; }
+  .booking-card {
+    background: white;
+    border-radius: 24px;
+    padding: 2.5rem 1.75rem;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 32px rgba(92,61,46,0.06);
+  }
+  .booking-card h3 {
+    font-family:'Playfair Display',serif;
+    font-size:1.5rem;
+    color:var(--brown);
+    margin-bottom:0.5rem;
+  }
+  .booking-card p { color:var(--text-muted); font-size:0.9rem; margin-bottom:1.5rem; font-weight:300; line-height:1.6; }
+  .booking-steps { display:flex; flex-direction:column; gap:0.75rem; margin-bottom:1.75rem; text-align:left; }
+  .step { display:flex; align-items:flex-start; gap:0.85rem; }
+  .step-num {
+    width:28px; height:28px; border-radius:50%;
+    background:var(--terra); color:white;
+    font-size:0.75rem; font-weight:500;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .step-text { font-size:0.85rem; color:var(--text-muted); padding-top:0.3rem; font-weight:300; }
+
+  /* SHOP */
+  .shop { background:var(--warm-white); }
+
+  .shop-tabs { display:flex; gap:0.5rem; margin-bottom:2rem; flex-wrap:wrap; }
+  .tab-btn {
+    padding:0.5rem 1.1rem;
+    border-radius:50px;
+    border:1.5px solid var(--border);
+    background:transparent;
+    color:var(--text-muted);
+    font-size:0.82rem;
+    font-family:'DM Sans',sans-serif;
+    cursor:pointer;
+    transition:all 0.2s;
+  }
+  .tab-btn.active { background:var(--terra); color:white; border-color:var(--terra); }
+
+  .products-grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap:1rem;
+  }
+
+  .product-card {
+    background:var(--cream);
+    border-radius:16px;
+    border:1px solid var(--border);
+    overflow:hidden;
+    transition:transform 0.2s, box-shadow 0.2s;
+  }
+  .product-card:hover { transform:translateY(-3px); box-shadow:0 10px 28px rgba(92,61,46,0.1); }
+
+  .product-img {
+    background: linear-gradient(135deg, var(--tan-light), var(--cream));
+    height:120px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:2.5rem;
+    position:relative;
+  }
+  .product-badge {
+    position:absolute; top:8px; right:8px;
+    background:var(--sage);
+    color:white;
+    font-size:0.6rem;
+    font-weight:500;
+    padding:2px 7px;
+    border-radius:50px;
+    letter-spacing:0.05em;
+  }
+  .product-badge.affiliate { background:var(--terra); }
+  .product-body { padding:0.9rem; }
+  .product-name { font-size:0.88rem; font-weight:500; color:var(--brown); margin-bottom:0.25rem; }
+  .product-desc { font-size:0.75rem; color:var(--text-muted); line-height:1.5; margin-bottom:0.75rem; font-weight:300; }
+  .product-price { font-size:0.85rem; color:var(--terra); font-weight:500; margin-bottom:0.6rem; }
+  .product-btn {
+    display:block; text-align:center;
+    background:var(--brown);
+    color:white;
+    padding:0.45rem 0;
+    border-radius:8px;
+    font-size:0.75rem;
+    font-weight:500;
+    text-decoration:none;
+    transition:background 0.2s;
+  }
+  .product-btn:hover { background:var(--terra); }
+  .product-card.coming-soon { opacity:0.6; }
+  .product-card.coming-soon .product-btn { background:var(--text-muted); cursor:not-allowed; }
+
+  /* TESTIMONIALS */
+  .testimonials { background:var(--cream); }
+  .reviews-grid { display:grid; gap:1rem; }
+  @media(min-width:600px){ .reviews-grid { grid-template-columns:1fr 1fr; } }
+
+  .review-card {
+    background:white;
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:1.25rem;
+  }
+  .stars { color:var(--tan); font-size:0.85rem; margin-bottom:0.5rem; letter-spacing:0.05em; }
+  .review-text { font-size:0.85rem; color:var(--text-muted); font-weight:300; line-height:1.6; font-style:italic; margin-bottom:0.75rem; }
+  .reviewer { font-size:0.78rem; font-weight:500; color:var(--brown); }
+  .reviewer span { font-weight:300; color:var(--text-muted); }
+
+  .review-placeholder {
+    background:var(--cream);
+    border:1.5px dashed var(--border);
+    border-radius:16px;
+    padding:1.5rem;
+    text-align:center;
+    color:var(--text-muted);
+    font-size:0.82rem;
+    font-weight:300;
+    line-height:1.6;
+  }
+
+  /* CONTACT */
+  .contact { background:var(--brown); color:white; border-radius:2rem; margin:0 0.75rem 2rem; }
+  .contact .section-label { color:rgba(255,255,255,0.5); }
+  .contact .section-title { color:white; }
+  .contact-grid { display:grid; gap:1.5rem; }
+  @media(min-width:600px){ .contact-grid { grid-template-columns:1fr 1fr; } }
+  .contact-item { display:flex; flex-direction:column; gap:0.3rem; }
+  .contact-label { font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.5); }
+  .contact-value { font-size:0.95rem; color:white; text-decoration:none; font-weight:300; }
+  .contact-value:hover { color:var(--tan); }
+
+  .contact-cta {
+    display:inline-flex; align-items:center; gap:0.4rem;
+    background:var(--terra);
+    color:white;
+    padding:0.85rem 1.75rem;
+    border-radius:50px;
+    font-size:0.9rem;
+    font-weight:500;
+    text-decoration:none;
+    margin-top:1.5rem;
+    transition:all 0.2s;
+  }
+  .contact-cta:hover { background:var(--terra-light); transform:translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    text-align:center;
+    padding:1.5rem;
+    font-size:0.75rem;
+    color:var(--text-muted);
+    font-weight:300;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(20px); }
+    to { opacity:1; transform:translateY(0); }
+  }
+
+  .fade-in {
+    opacity:0;
+    transform:translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .fade-in.visible { opacity:1; transform:none; }
+
+  /* DIVIDER */
+  .paw-divider {
+    text-align:center;
+    padding:0.5rem;
+    font-size:1rem;
+    opacity:0.3;
+    letter-spacing:0.5rem;
+  }
+
+  /* MAX WIDTH */
+  .container { max-width:800px; margin:0 auto; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    Auntie Dani's Pet Sitting
+    <span>Las Vegas, NV · auntiedanipets.com</span>
+  </a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#shop">Shop</a>
+      <a href="#about">About</a>
+    </div>
+    <a href="#booking" class="btn-book-nav">Book Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-paws p1">🐾</div>
+  <div class="hero-paws p2">🐾</div>
+  <div class="hero-paws p3">🐾</div>
+
+  <div class="hero-badge">🐾 Serving Southwest Las Vegas</div>
+
+  <h1>Your pets deserve<br><em>someone who truly cares.</em></h1>
+  <p class="hero-sub">Professional pet sitting & dog walking from someone who loves animals as much as you do.</p>
+
+  <div class="hero-ctas">
+    <a href="#booking" class="btn-primary">📅 Book a Service</a>
+    <a href="#shop" class="btn-secondary">🛍 Shop Pet Picks</a>
+  </div>
+
+  <div class="hero-trust">
+    <div class="trust-item"><span class="trust-dot"></span> Pet First Aid Certified</div>
+    <div class="trust-item"><span class="trust-dot"></span> Insured & Licensed</div>
+    <div class="trust-item"><span class="trust-dot"></span> Also on Rover & Wag</div>
+  </div>
+</section>
+
+<div class="paw-divider">🐾 🐾 🐾</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-label">What I offer</div>
+      <h2 class="section-title">Loving care, every visit.</h2>
+      <p class="section-sub">Whether you need someone to pop in or a full day of walks, I've got your fur babies covered.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card sit fade-in">
+        <div class="service-icon">🏠</div>
+        <div class="service-name">Pet Sitting</div>
+        <div class="service-desc">In-home visits so your pets stay comfortable in their own space while you're away.</div>
+        <div class="service-price">From $22 <span>/ 30-min visit</span></div>
+        <ul class="service-includes">
+          <li>Feeding & fresh water</li>
+          <li>Playtime & cuddles</li>
+          <li>Litter / potty breaks</li>
+          <li>Photo updates sent to you</li>
+          <li>Medication administration</li>
+        </ul>
+        <a href="#booking" class="book-link">Book a Visit →</a>
+      </div>
+
+      <div class="service-card walk fade-in">
+        <div class="service-icon">🦮</div>
+        <div class="service-name">Dog Walking</div>
+        <div class="service-desc">Daily walks that keep your pup exercised, happy, and on their routine.</div>
+        <div class="service-price">From $18 <span>/ 30-min walk</span></div>
+        <ul class="service-includes">
+          <li>30 or 60 minute options</li>
+          <li>GPS tracked routes</li>
+          <li>Post-walk report card</li>
+          <li>Fresh water after walk</li>
+          <li>Recurring discounts available</li>
+        </ul>
+        <a href="#booking" class="book-link">Book a Walk →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container about-inner">
+    <div class="about-emoji">🐈‍⬛</div>
+    <div class="section-label">Meet your pet's new auntie</div>
+    <h2 class="section-title">Hi, I'm Dani.</h2>
+    <p class="about-text">
+      I've always been the person in the neighborhood who everyone trusted with their animals — and honestly, I wouldn't have it any other way. Animals are my people. I understand them, I love them, and I treat every pet I care for like they're my own.
+    </p>
+    <p class="about-text">
+      Based right here in Southwest Las Vegas, I offer personalized, one-on-one care so your fur babies get actual attention — not just a quick check-in. When you're away, you'll get photos and updates so you never have to wonder if they're okay.
+    </p>
+    <div class="about-certs">
+      <span class="cert-badge">🏥 Pet First Aid Certified</span>
+      <span class="cert-badge">🛡 PSA Insured</span>
+      <span class="cert-badge">✅ Background Checked</span>
+      <span class="cert-badge">📋 Licensed & Bonded</span>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="booking">
+  <div class="booking-inner fade-in">
+    <div class="section-label" style="text-align:center;">Ready to book?</div>
+    <h2 class="section-title" style="text-align:center; margin-bottom:1.5rem;">Let's get started.</h2>
+
+    <div class="booking-card">
+      <h3>Request a Meet & Greet</h3>
+      <p>Every new client starts with a free meet & greet so I can get to know your pet, understand their routine, and make sure we're a great match.</p>
+
+      <div class="booking-steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text">Click below to pick a date and time that works for you</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text">Tell me about your pet — breed, age, any special needs</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text">We meet, the pets approve, and we schedule your first visit</div>
+        </div>
+      </div>
+
+      <a href="https://calendly.com" target="_blank" class="btn-primary" style="width:100%; justify-content:center; font-size:1rem; padding:1rem;">
+        📅 Schedule a Free Meet & Greet
+      </a>
+      <p style="font-size:0.75rem; color:var(--text-muted); margin-top:0.75rem; margin-bottom:0;">
+        Also available on <a href="https://rover.com" style="color:var(--terra);">Rover</a> and <a href="https://wagwalking.com" style="color:var(--terra);">Wag</a> if you prefer to book there.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="paw-divider">🐾 🐾 🐾</div>
+
+<!-- SHOP -->
+<section class="shop" id="shop">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-label">Auntie Dani's picks</div>
+      <h2 class="section-title">Products I actually use.</h2>
+      <p class="section-sub">Everything here is something I've personally tried on my own pets. No fluff, no filler — just stuff that works.</p>
+    </div>
+
+    <div class="shop-tabs">
+      <button class="tab-btn active" onclick="showTab('affiliate', this)">🛍 Pet Favorites</button>
+      <button class="tab-btn" onclick="showTab('digital', this)">📥 Digital Downloads</button>
+    </div>
+
+    <div id="tab-affiliate" class="products-grid">
+      <div class="product-card fade-in">
+        <div class="product-img">
+          🐱
+          <span class="product-badge affiliate">Affiliate</span>
+        </div>
+        <div class="product-body">
+          <div class="product-name">Feline Cat Mix</div>
+          <div class="product-desc">Our cats' absolute favorite. Balanced nutrition they actually get excited about.</div>
+          <div class="product-price">Shop on Chewy →</div>
+          <a href="#" class="product-btn">Get It</a>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-img">
+          🦷
+          <span class="product-badge affiliate">Affiliate</span>
+        </div>
+        <div class="product-body">
+          <div class="product-name">Crazy Cat Ladies Cat Teef</div>
+          <div class="product-desc">Dental care made easy. Our cats tolerate this one, which is saying something.</div>
+          <div class="product-price">Shop on Amazon →</div>
+          <a href="#" class="product-btn">Get It</a>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-img">
+          🐾
+          <span class="product-badge affiliate">Affiliate</span>
+        </div>
+        <div class="product-body">
+          <div class="product-name">More Picks Coming</div>
+          <div class="product-desc">I'm adding products as I vet them. Only sharing things I genuinely use.</div>
+          <div class="product-price">Check back soon</div>
+          <a href="#" class="product-btn" style="background:var(--text-muted);">Coming Soon</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-digital" class="products-grid" style="display:none;">
+      <div class="product-card coming-soon fade-in">
+        <div class="product-img">
+          📋
+          <span class="product-badge">Digital</span>
+        </div>
+        <div class="product-body">
+          <div class="product-name">Pet Care Planner</div>
+          <div class="product-desc">Printable daily care tracker, feeding log, and vet visit record keeper.</div>
+          <div class="product-price">Coming Soon</div>
+          <a href="#" class="product-btn">Coming Soon</a>
+        </div>
+      </div>
+
+      <div class="product-card coming-soon fade-in">
+        <div class="product-img">
+          🐕
+          <span class="product-badge">Digital</span>
+        </div>
+        <div class="product-body">
+          <div class="product-name">New Puppy Checklist</div>
+          <div class="product-desc">Everything you need the first 30 days with a new pup. Printable PDF.</div>
+          <div class="product-price">Coming Soon</div>
+          <a href="#" class="product-btn">Coming Soon</a>
+        </div>
+      </div>
+
+      <div class="product-card coming-soon fade-in">
+        <div class="product-img">
+          🐈
+          <span class="product-badge">Digital</span>
+        </div>
+        <div class="product-body">
+          <div class="product-name">Cat Owner Starter Kit</div>
+          <div class="product-desc">First-time cat parent essentials, vet record sheet, and feeding guide.</div>
+          <div class="product-price">Coming Soon</div>
+          <a href="#" class="product-btn">Coming Soon</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials fade-in">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Kind words</div>
+      <h2 class="section-title">What pet parents say.</h2>
+    </div>
+
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <div class="review-text">"Dani is an absolute angel with our cats. She sent photos every visit and I could tell they were completely at ease with her. Will never use anyone else."</div>
+        <div class="reviewer">Sarah M. <span>· Las Vegas, NV</span></div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <div class="review-text">"Finally found someone who actually loves animals. My dog gets so excited when Dani shows up for walks. 100% recommend."</div>
+        <div class="reviewer">Marcus T. <span>· Southwest LV</span></div>
+      </div>
+
+      <div class="review-placeholder">
+        ✦ More reviews coming soon ✦<br>
+        <span style="font-size:0.75rem;">Find us on Rover for verified client reviews</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-label">Get in touch</div>
+    <h2 class="section-title">Let's talk about your pet.</h2>
+
+    <div class="contact-grid" style="margin-top:1.5rem;">
+      <div class="contact-item">
+        <span class="contact-label">Email</span>
+        <a href="mailto:hello@auntiedanipets.com" class="contact-value">hello@auntiedanipets.com</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Service Area</span>
+        <span class="contact-value">Southwest Las Vegas, NV 89139</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Also find me on</span>
+        <span class="contact-value">Rover · Wag · TikTok · Instagram</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Social</span>
+        <a href="#" class="contact-value">@auntiedanipets</a>
+      </div>
+    </div>
+
+    <a href="#booking" class="contact-cta">📅 Book a Meet & Greet</a>
+  </div>
+</section>
+
+<footer>
+  © 2025 Auntie Dani's Pet Sitting · Las Vegas, NV · auntiedanipets.com<br>
+  <span style="opacity:0.6;">Insured · Licensed · Certified</span>
+</footer>
+
+<script>
+  // Tab switching
+  function showTab(tab, btn) {
+    document.getElementById('tab-affiliate').style.display = tab === 'affiliate' ? 'grid' : 'none';
+    document.getElementById('tab-digital').style.display = tab === 'digital' ? 'grid' : 'none';
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
